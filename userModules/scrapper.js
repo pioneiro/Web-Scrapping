@@ -12,7 +12,7 @@ const getMetaData = ($, name) =>
 	$(`meta[property="twitter:${name}"]`).attr("content");
 
 const scrapper = async (url) => {
-	const res = await fetch(url).catch((error) =>
+	const res = await fetch(url, { mode: "cors" }).catch((error) =>
 		sendError({ url, error: error.message })
 	);
 	if (res) {

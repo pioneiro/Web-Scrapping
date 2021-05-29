@@ -16,9 +16,18 @@
 		<main>
 			<div class="container">
 				<% if (length === 0) { %>
-				<section class="error">No Valid URLs</section>
+				<section class="negative">
+					<div class="note">
+						No valid URLs were provided.
+						<br />
+						Note: This site currently accepts only absolute urls starting with
+						http, https or www.
+					</div>
+				</section>
 				<% } else { %>
-				<section class="positive"></section>
+				<section class="positive">
+					<div id="id" hidden><%= id %></div>
+				</section>
 				<section class="negative">
 					<div class="note">
 						Wait while the sites provided are beign scrapped. If any error

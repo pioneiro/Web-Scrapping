@@ -1,8 +1,6 @@
 import fetch from "node-fetch";
 import { load } from "cheerio";
 
-const urlRegEx = new RegExp(/https?:\/\/(www\.)?/gi);
-
 const getURL = (link, parent) => new URL(link, parent).href;
 
 const getMetaData = ($, name) =>
@@ -39,6 +37,6 @@ const scrapper = async (url, callback) => {
 };
 
 const filterURL = (urlList) =>
-	urlList.split("\r\n").filter((url) => url.match(urlRegEx));
+	urlList.split("\r\n").filter((url) => url.length > 0);
 
 export { scrapper, filterURL };

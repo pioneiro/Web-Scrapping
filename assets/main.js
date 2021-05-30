@@ -9,9 +9,13 @@ window.onload = () => {
 
 	socket.on("incoming", (data) => {
 		const page = `
-		<div class="page">
+		<a class="page" href="${data.url}" target="_blank">
 			<div class="tab">
-				<div class="url">${data.url}</div>
+				<div class="url">${
+					data.url.length > 48
+						? data.url.slice(0, 47).concat(".....")
+						: data.url
+				}</div>
 			</div>
 			<div class="content">
 				<div class="details">
@@ -33,7 +37,7 @@ window.onload = () => {
 					alt="${data.url} image"
 				/>
 			</div>
-		</div>
+		</a>
 		`;
 
 		positive.innerHTML += page;
@@ -42,7 +46,9 @@ window.onload = () => {
 	socket.on("error", ({ url, error }) => {
 		const errorItem = `
 		<li>
-			<div class="url">${url}</div>
+			<a href="${url}" target="_blank" class="url">${
+			url.length > 48 ? url.slice(0, 47).concat(".....") : url
+		}</a>
 			<div class="error">${error}</div>
 		</li>
 		`;

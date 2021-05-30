@@ -17,13 +17,15 @@ let urlObj = new Object();
 io.on("connection", (socket) => {
 	socket.on("established", (id) => {
 		const urlList = urlObj[id];
-		urlList.forEach((url) => {
-			scrapper(url, (data) => {
-				if (data.error) io.to(socket.id).emit("error", data);
-				else io.to(socket.id).emit("incoming", data);
+		if (urlList) {
+			urlList.forEach((url) => {
+				scrapper(url, (data) => {
+					if (data.error) io.to(socket.id).emit("error", data);
+					else io.to(socket.id).emit("incoming", data);
+				});
 			});
-		});
-		delete urlObj[id];
+			delete urlObj[id];
+		}
 	});
 });
 

@@ -32,6 +32,9 @@ const scrapper = async (url, callback) => {
 		if (!data.image) data.image = "/default.svg";
 		else data.image = getURL(data.image, data.url);
 
+		if (data.description.length > 256)
+			data.description = data.description.slice(0, 255).concat("..........");
+
 		callback(data);
 	}
 };
